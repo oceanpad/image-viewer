@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Viewer</title>
+  <style type="text/css">
+    .opt {
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      width: 1024px;
+      margin-top: 8px;
+    }
+
+    .opt ul {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .opt ul li {
+      list-style: none;
+      display: inline-block;
+      padding: 0 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 34px;
+      margin: 0 3px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    canvas {
+      background-color: black;
+    }
+  </style>
+  <script src="../dist/viewer.1.0.0.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body onload="start()">
+  <canvas id='canvas' width='1024' height='768' style="border: 1px solid #ccc"></canvas>
+  <img src="./a.jpg" style="display: none" id="img">
+  <div class="opt">
+    <ul>
+      <li onclick="view.scale(1.5)">Zoom in</li>
+      <li onclick="view.scale(0.5)">Zoom out</li>
+      <li onclick="view.setOriginalSize()">1:1</li>
+      <li onclick="view.hRevert()">Horizontal Reversal</li>
+      <li onclick="view.vRevert()">Flip Vertically</li>
+      <li onclick="view.rotate(Math.PI/4)">Rotate Right</li>
+      <li onclick="view.rotate(-Math.PI/4)">Rotate Left</li>
+      <li onclick="initDraw()">Reset</li>
+    </ul>
+    <div>
+</body>
+<script>
+  let view
+  let canvas
+
+  function initDraw() {
+    view.init()
+    view.draw()
+  }
+
+
+  function start() {
+    canvas = document.getElementById('canvas')
+    let img = document.getElementById("img");
+    view = new Viewer(canvas, img)
+    view.draw()
+  }
+</script>
+
+</html>
